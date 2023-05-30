@@ -1,4 +1,5 @@
 import { defineConfig } from "tsup";
+import packageJson from "./package.json" assert { type: "json" };
 
 export function createTsupConfig({
   entry = ["src/index.ts"],
@@ -37,15 +38,11 @@ export function createTsupConfig({
 }
 
 export default createTsupConfig({
-  noExternal: [
-    "@actions/core",
-    "@actions/exec",
-    "@actions/tool-cache",
-    "@actions/cache",
-  ],
+  noExternal: Object.keys(packageJson.dependencies),
   skipNodeModulesBundle: false,
   minify: true,
   dts: false,
   sourcemap: false,
+  format: ["cjs"],
   platform: "node",
 });
