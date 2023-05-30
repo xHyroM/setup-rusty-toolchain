@@ -1,5 +1,5 @@
 name: Setup Rusty Toolchain
-description: Automates the installation of the complete Rust toolchain, empowering you to effortlessly build, test, and deploy Rust projects. Simplify your development workflow and start coding in Rust seamlessly.
+description: "Automates the installation of the complete Rust toolchain, empowering you to effortlessly build, test, and deploy Rust projects."
 author: xHyroM
 
 branding:
@@ -20,10 +20,6 @@ inputs:
     default: true
     required: false
 
-outputs:
-  cache-hit:
-    desciption: "Whether the cache was hit or not."
-
 runs:
-  using: nodejs16
+  using: node16
   main: dist/index.js
