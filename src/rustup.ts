@@ -23,7 +23,7 @@ export const download = async () => {
     }
     default: {
       const output = await getExecOutput(
-        "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"
+        "cur -fsSL https://sh.rustup.rs | sh -s -- -y"
       );
 
       console.log(output);
