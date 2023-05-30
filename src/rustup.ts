@@ -1,5 +1,6 @@
 import { getExecOutput } from "@actions/exec";
 import { downloadTool } from "@actions/tool-cache";
+import { chmod } from "fs/promises";
 
 export const download = async () => {
   console.log("Downloading rustup...");
@@ -12,19 +13,19 @@ export const download = async () => {
         ? "https://win.rustup.rs/x86_64"
         : "https://win.rustup.rs/i686";
 
-      const path = await downloadTool(url);
+      const rustupSh = await downloadTool(url);
+      await chmod(rustupSh, 0o755);
 
-      console.log(`Downloaded rustup installer to ${path}`);
-
-      const output = await getExecOutput(`${path} -y`);
+      const output = await getExecOutput(rustupSh, ["-y"]);
       console.log(output);
 
       break;
     }
     default: {
-      const output = await getExecOutput(
-        "cur -fsSL https://sh.rustup.rs | sh -s -- -y"
-      );
+      const rustupSh = await downloadTool("https://sh.rustup.rs");
+      await chmod(rustupSh, 0o755);
+
+      const output = await getExecOutput(rustupSh, ["-y"]);
 
       console.log(output);
     }
