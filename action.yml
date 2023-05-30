@@ -1,0 +1,29 @@
+name: Setup Rusty Toolchain
+description: Automates the installation of the complete Rust toolchain, empowering you to effortlessly build, test, and deploy Rust projects. Simplify your development workflow and start coding in Rust seamlessly.
+author: xHyroM
+
+branding:
+  icon: play-circle
+  color: red
+
+inputs:
+  channel:
+    desciption: "The channel to use for the Rust toolchain (e.g stable, nightly)."
+    default: "stable"
+    required: false
+  version:
+    desciption: "The version to use for the Rust toolchain (e.g 1.68.0)."
+    default: "latest"
+    required: false
+  cache:
+    desciption: "Whether to cache the Rust toolchain or not."
+    default: true
+    required: false
+
+outputs:
+  cache-hit:
+    desciption: "Whether the cache was hit or not."
+
+runs:
+  using: nodejs16
+  main: dist/index.js
