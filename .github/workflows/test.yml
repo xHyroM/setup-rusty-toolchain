@@ -4,7 +4,9 @@
 # against bad commits.
 
 name: Setup rust
-on: [push]
+on:
+  workflow_dispatch:
+  push:
 
 jobs:
   setup:
